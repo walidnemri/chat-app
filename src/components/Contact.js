@@ -1,19 +1,26 @@
 import React from "react";
-import axios from "axios";
+import PropTypes from 'prop-types';
 import "./Contact.css";
 
+Contact.propTypes = {
+    user : PropTypes.exact({
+        name: PropTypes.string,
+        image: PropTypes.string,
+        online: PropTypes.bool.isRequired
+    }),
+}
 
-function Contact(){
+function Contact(props){
   
-    const status = "status-online";
+    const status = props.user.online ? "status-online":"status-offline";
     return (
         <div className="Contact">
-            <img className="avatar" src="https://pm1.narvii.com/7070/aeaeadea89d89327a8e5f4f83d10272dc337425fr1-1200-1200v2_128.jpg"></img>
+            <img alt="" className="avatar" src={props.user.image}></img>
             <div className="Contact-content">
-                <div className="name">nemri walid</div>
+                <div className="name">{props.user.name}</div>
                 <div className="status">
                     <div className={status}></div>
-                    <div className="status-text">offline</div>
+                    <div className="status-text">{ props.user.online ? "online":"offline"}</div>
                 </div>
             </div>
 
@@ -21,5 +28,6 @@ function Contact(){
         </div>
     )
 }
+
 
 export default Contact
