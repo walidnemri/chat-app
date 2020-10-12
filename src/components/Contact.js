@@ -5,7 +5,7 @@ import "./Contact.css";
 Contact.propTypes = {
     user : PropTypes.exact({
         name: PropTypes.string,
-        image: PropTypes.string,
+        avatar: PropTypes.string,
         online: PropTypes.bool.isRequired
     }),
 }
@@ -15,7 +15,7 @@ function Contact(props){
     const status = props.user.online ? "status-online":"status-offline";
     return (
         <div className="Contact">
-            <img alt="" className="avatar" src={props.user.image}></img>
+            <img alt="" className="avatar" src={props.user.avatar}></img>
             <div className="Contact-content">
                 <div className="name">{props.user.name}</div>
                 <div className="status">
