@@ -1,32 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import "./Contact.css";
 
-Contact.propTypes = {
-    user : PropTypes.exact({
-        name: PropTypes.string,
-        avatar: PropTypes.string,
-        online: PropTypes.bool.isRequired
-    }),
+
+
+class Contact extends Component{
+    state = {
+        online: this.props.online,
+    }
+
+    changeStatus = () => {
+        this.setState(prevState => ({ online: !prevState.online }))
+    }
+
+    render(){
+        const status = this.state.online? "status-online":"status-offline";
+        const { name, avatar } = this.props;
+        return (
+            <div className="Contact">
+                <img alt="" className="avatar" src={ avatar }></img>
+                <div className="Contact-content">
+                    <div className="name">{ name }</div>
+                    <div className="status" onClick={ this.changeStatus }>
+                        <div className={ status }></div>
+                        <div className="status-text" >{ this.state.online ? "online":"offline" }</div>
+                    </div>
+                </div>
+    
+    
+            </div>
+        )
+
+    }
+  
 }
 
-function Contact(props){
-  
-    const status = props.user.online ? "status-online":"status-offline";
-    return (
-        <div className="Contact">
-            <img alt="" className="avatar" src={props.user.avatar}></img>
-            <div className="Contact-content">
-                <div className="name">{props.user.name}</div>
-                <div className="status">
-                    <div className={status}></div>
-                    <div className="status-text">{ props.user.online ? "online":"offline"}</div>
-                </div>
-            </div>
-
-
-        </div>
-    )
+Contact.propTypes = { 
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+    online: PropTypes.bool
 }
 
 

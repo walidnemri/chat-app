@@ -31,7 +31,7 @@ function ContactList(){
         }
       ];
 
-      const list = users.map((user, i) => <Contact user={user} key={i}/>)
+      const list = users.map((user, i) => <Contact {...user} key={i}/>)
     return(
         list
     )
